@@ -1,0 +1,11 @@
+<div *ngIf="order" class="baseCss">
+  <h2>{{order.name | uppercase}} Details</h2>
+  <div><span>Id : </span>{{order.id}}</div>
+  <div><span>Description : </span>{{order.description}}</div>
+  <div><span>User Name : </span>{{order.userName}}</div>
+  <div>
+    <button routerLink="/order-edit/{{order.id}}">
+      Edit
+    </button>
+  </div>
+</div>

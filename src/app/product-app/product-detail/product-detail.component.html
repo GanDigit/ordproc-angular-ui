@@ -1,0 +1,13 @@
+<div *ngIf="product" class="baseCss">
+  <h2>{{product.name | uppercase}} Details</h2>
+  <div><span>Id : </span>{{product.id}}</div>
+  <div><span>Category : </span>{{product.category}}</div>
+  <div><span>Name : </span>{{product.name}}</div>
+  <div><span>Description : </span>{{product.description}}</div>
+  <div><span>Price : </span>{{product.price}}</div>
+  <div>
+    <button routerLink="/product-edit/{{product.id}}">
+      Edit
+    </button>
+  </div>
+</div>
