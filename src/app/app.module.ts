@@ -15,6 +15,7 @@ import { OrderComponent } from './order-app/order/order.component';
 import { OrderAddComponent } from './order-app/order-add/order-add.component';
 import { OrderDetailComponent } from './order-app/order-detail/order-detail.component';
 import { OrderEditComponent } from './order-app/order-edit/order-edit.component';
+import { ConfigComponent } from './config-app/config/config.component';
 
 const appRoutes: Routes = [
   {
@@ -60,6 +61,11 @@ const appRoutes: Routes = [
     path: 'order-edit/:id',
     component: OrderEditComponent,
     data: { title: 'Order Edit' }
+  },
+  {
+    path: 'update-config*',
+    component: ConfigComponent,
+    data: { title: 'Config Details' }
   }
 ];
 
@@ -73,7 +79,8 @@ const appRoutes: Routes = [
     OrderComponent,
     OrderAddComponent,
     OrderDetailComponent,
-    OrderEditComponent
+    OrderEditComponent,
+    ConfigComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
