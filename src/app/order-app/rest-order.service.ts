@@ -17,24 +17,41 @@ const httpOptions = {
 export class RestOrderService {
 
   //endpoint = 'http://localhost:8081/';
-  endpoint = 'http://9.204.168.81:31494/';
+  endpoint = 'http://9.204.168.81:';
+  endpointPort : string = '31494';
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getEndPointPort();
+    console.log("url url -->" + this.endpointPort)
+   }
 
   getEndPoint() {
-    return this.endpoint;
+    let result = this.endpoint + this.endpointPort + "/";
+    console.log("URL Result 2:" + result);
+    return result;
   }
+
+  getEndPointPort() {
+    return this.http.get('https://raw.githubusercontent.com/GanDigit/ConfigRepo/master/catalog-p.txt').pipe(map(this.extractDataString));
+  }
+
+  private extractDataString(res: Response) {
+    let body = res;
+    let result = body || { };
+    //this.endpointPort = result + "";
+    return result;
+  }
+
+
 
   private extractData(res: Response) {
     let body = res;
     return body || { };
   }
 
-
   getOrders(): Observable<any> {
     console.log("EndPoint 1-->" + this.getEndPoint());
-    console.log("EndPoint 11-->" + this.endpoint);
-    return this.http.get(this.endpoint + 'orders').pipe(
+    return this.http.get(this.getEndPoint() + 'orders').pipe(
       map(this.extractData));
   }
   

@@ -16,22 +16,37 @@ const httpOptions = {
 export class RestService {
 
   //endpoint = 'http://localhost:8082/';
-  endpoint = 'http://9.204.168.81:32381/';
-
-  constructor(private http: HttpClient) { }
+  endpoint = 'http://9.204.168.81:';
+  endpointPort : string = '32381';
+  
+  constructor(private http: HttpClient) {
+    this.getEndPointPort();
+    console.log("url url -->" + this.endpointPort)
+   }
 
   getEndPoint() {
-    return this.endpoint;
+    let result = this.endpoint + this.endpointPort + "/";
+    console.log("URL Result 2:" + result);
+    return result;
+  }
+
+  getEndPointPort() {
+    return this.http.get('https://raw.githubusercontent.com/GanDigit/ConfigRepo/master/catalog-p.txt').pipe(map(this.extractDataString));
+  }
+
+  private extractDataString(res: Response) {
+    let body = res;
+    let result = body || { };
+    //this.endpointPort = result + "";
+    return result;
   }
 
   private extractData(res: Response) {
     let body = res;
-    console.log('extractData--> ${res}')
     return body || { };
   }
 
   getProducts(): Observable<any> {
-    console.log('getProducts--> sdf')
     return this.http.get(this.getEndPoint() + 'products').pipe(
       map(this.extractData));
   }
